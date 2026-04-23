@@ -1,7 +1,12 @@
 # 旅无忧 · 前端
 
 > 发现身边的好去处 —— 本地生活探索与分享平台
+> 
+> 需将后端IMAGE_UPLOAD_DIR指向前端public/imgs目录
 >
+> 一些功能项目本身未实现  需自行实现
+>
+> 报401需要在后端拦截器排除该路径
 > # web端适配
 <img width="1906" height="937" alt="image" src="https://github.com/user-attachments/assets/54611c6c-2384-4652-ae5d-18ae84f68782" />
 # 移动端适配
