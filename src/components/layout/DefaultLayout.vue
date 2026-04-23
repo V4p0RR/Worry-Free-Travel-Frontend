@@ -157,6 +157,18 @@ function goBack() {
         </svg>
         <span>{{ n.label }}</span>
       </RouterLink>
+      <!-- 我的：登录跳主页，未登录跳登录页 -->
+      <RouterLink
+        :to="auth.isLoggedIn ? '/profile' : '/login'"
+        class="mob-tab__item"
+        active-class="mob-tab__item--active"
+      >
+        <VAvatar v-if="auth.isLoggedIn" :src="auth.avatar" :size="22" />
+        <svg v-else viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="8" r="4" /><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+        </svg>
+        <span>{{ auth.isLoggedIn ? '我的' : '登录' }}</span>
+      </RouterLink>
     </nav>
   </div>
 </template>
