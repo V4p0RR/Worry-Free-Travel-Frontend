@@ -36,8 +36,12 @@ export const useAuthStore = defineStore('auth', {
       }
     },
     async logout(silent = false) {
+      const had = !!this.token
       this.token = ''
       this.user = null
+      if (had && !silent) {
+        userApi.logout().catch(() => {})
+      }
     }
   },
   persist: {
