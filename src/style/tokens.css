@@ -1,0 +1,79 @@
+:root {
+  /* 背景层（仿 claude.ai 米色） */
+  --bg: #faf9f5;
+  --bg-sunk: #f3f1ea;
+  --bg-elevated: #ffffff;
+  --bg-overlay: rgba(31, 30, 29, 0.55);
+
+  /* 前景 / 文字 */
+  --fg: #1f1e1d;
+  --fg-muted: #5a5856;
+  --fg-subtle: #8c8a86;
+  --fg-on-accent: #faf9f5;
+
+  /* 边框 / 分隔 */
+  --border: #e8e4d8;
+  --border-strong: #d8d3c3;
+
+  /* 强调色（Claude 米色 → 琥珀） */
+  --accent: #c96442;
+  --accent-hover: #b85535;
+  --accent-soft: rgba(201, 100, 66, 0.1);
+  --accent-ring: rgba(201, 100, 66, 0.25);
+
+  /* 语义色 */
+  --success: #3f8c5f;
+  --danger: #c44536;
+  --warning: #c58a2a;
+  --info: #5c7b9a;
+
+  /* 投影 */
+  --shadow-xs: 0 1px 2px rgba(31, 30, 29, 0.04);
+  --shadow-sm: 0 2px 6px rgba(31, 30, 29, 0.06);
+  --shadow-md: 0 8px 24px rgba(31, 30, 29, 0.08);
+  --shadow-lg: 0 18px 48px rgba(31, 30, 29, 0.12);
+
+  /* 圆角 */
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  /* 间距 */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  /* 字体 */
+  --font-sans: "Inter", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Tiempos Headline", "Source Han Serif SC", "Noto Serif SC", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* 字号 */
+  --text-xs: 12px;
+  --text-sm: 13px;
+  --text-base: 14px;
+  --text-md: 15px;
+  --text-lg: 17px;
+  --text-xl: 20px;
+  --text-2xl: 24px;
+  --text-3xl: 30px;
+  --text-4xl: 40px;
+
+  /* 布局 */
+  --sidebar-w: 240px;
+  --topbar-h: 56px;
+  --max-content-w: 1200px;
+
+  /* 动画 */
+  --ease: cubic-bezier(0.2, 0.6, 0.2, 1);
+  --dur-fast: 120ms;
+  --dur: 200ms;
+  --dur-slow: 360ms;
+}
