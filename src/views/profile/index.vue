@@ -22,7 +22,15 @@ const signedCount = ref(0)
 const signedToday = ref(false)
 const signing = ref(false)
 
-const activeTab = ref('1')
+// sessionStorage 按用户+日期存，当日关闭页面再回来仍有效
+function signKey() {
+  const today = new Date().toISOString().slice(0, 10)
+  return `signed_${auth.user?.id}_${today}`
+}
+function readSignedFromSession() {
+  signedToday.value = sessionStorage.getItem(signKey()) === '1'
+}
+
 const tabs = [
   { key: '1', label: '我的笔记' },
   { key: '2', label: '关注动态' }
@@ -74,6 +82,7 @@ async function doSign() {
   try {
     await userApi.sign()
     signedToday.value = true
+    sessionStorage.setItem(signKey(), '1')
     window.$message?.success('签到成功 ✨')
     loadSignCount()
   } catch (_) {
@@ -102,7 +111,7 @@ const introduce = computed(() => info.value?.introduce || '添加个人简介，
 
 watch(
   () => auth.user?.id,
-  (id) => { if (id) { loadInfo(); loadBlogs() } },
+  (id) => { if (id) { loadInfo(); loadBlogs(); readSignedFromSession() } },
   { immediate: true }
 )
 onMounted(loadSignCount)
