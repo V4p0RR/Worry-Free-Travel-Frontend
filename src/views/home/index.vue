@@ -20,6 +20,20 @@ async function loadTypes() {
   } catch (_) {}
 }
 
+function typeIcon(icon) {
+  if (!icon) return ''
+  const s = String(icon).trim()
+  // 只有文件名，补完整路径
+  if (!s.includes('/')) return `/imgs/types/${s}`
+  // 已有 /imgs/ 前缀，直接用
+  if (s.startsWith('/imgs/')) return s
+  // /types/xxx 格式
+  if (s.startsWith('/types/')) return `/imgs${s}`
+  // /icons/xxx 格式（旧数据）
+  if (s.startsWith('/icons/')) return `/imgs/types/${s.split('/').pop()}`
+  return s
+}
+
 async function loadMore() {
   if (loading.value || reachedEnd.value) return
   loading.value = true
@@ -69,7 +83,7 @@ onMounted(() => {
       <div class="type-grid">
         <button v-for="t in types" :key="t.id" class="type-tile" @click="goType(t)">
           <div class="type-tile__icon">
-            <img v-if="t.icon" :src="resolveImg(t.icon, '/types')" :alt="t.name" @error="(e) => e.target.style.display = 'none'" />
+            <img v-if="t.icon" :src="typeIcon(t.icon)" :alt="t.name" @error="(e) => e.target.style.display = 'none'" />
           </div>
           <span class="type-tile__name">{{ t.name }}</span>
         </button>

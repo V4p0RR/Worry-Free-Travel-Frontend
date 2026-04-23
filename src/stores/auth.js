@@ -10,7 +10,7 @@ export const useAuthStore = defineStore('auth', {
   getters: {
     isLoggedIn: (state) => !!state.token,
     nickName: (state) => state.user?.nickName || '',
-    avatar: (state) => resolveImg(state.user?.icon) || '/icons/default-icon.png'
+    avatar: (state) => resolveImg(state.user?.icon) || '/imgs/icons/default-icon.png'
   },
   actions: {
     async loginByCode({ phone, code }) {
@@ -36,14 +36,8 @@ export const useAuthStore = defineStore('auth', {
       }
     },
     async logout(silent = false) {
-      const had = !!this.token
       this.token = ''
       this.user = null
-      if (had && !silent) {
-        try {
-          await userApi.logout()
-        } catch (_) {}
-      }
     }
   },
   persist: {

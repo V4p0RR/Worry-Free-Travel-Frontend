@@ -7,13 +7,13 @@ const props = defineProps({
   alt: { type: String, default: '' },
   size: { type: [String, Number], default: 36 }
 })
-const fallback = '/icons/default-icon.png'
+const fallback = '/imgs/icons/default-icon.png'
 const resolved = computed(() => resolveImg(props.src) || fallback)
 </script>
 
 <template>
   <span class="v-avatar" :style="{ width: size + 'px', height: size + 'px' }">
-    <img :src="resolved" :alt="alt" @error="(e) => (e.target.src = fallback)" />
+    <img :src="resolved" :alt="alt" @error="(e) => { e.target.onerror = null; e.target.src = fallback }" />
   </span>
 </template>
 

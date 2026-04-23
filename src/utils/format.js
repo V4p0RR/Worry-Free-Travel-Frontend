@@ -38,18 +38,18 @@ export function formatRelativeDate(timestamp) {
 }
 
 /**
- * 归一化后端返回的图片路径。
- * 后端沿用老 nginx 的 `/imgs/...` 前缀，而新前端把静态资源直接挂在 public 根下
- * （`/icons/...` `/blogs/...` `/types/...`），所以统一剥掉 `/imgs` 前缀。
- * 纯文件名时可带一个 fallbackDir 兜底。
+ * 归一化图片路径到 /imgs/ 下。
+ * 已有 /imgs/ 前缀的直接用；/blogs/ /icons/ /types/ 开头的补上 /imgs 前缀；
+ * 纯文件名时用 fallbackDir 兜底。
  */
 export function resolveImg(src, fallbackDir = '') {
   if (!src) return ''
   const s = String(src).trim()
   if (!s) return ''
   if (/^(https?:|data:|blob:)/i.test(s)) return s
-  if (s.startsWith('/imgs/')) return s.slice(5)
-  if (s.startsWith('imgs/')) return '/' + s.slice(5)
+  if (s.startsWith('/imgs/')) return s
+  // 旧路径兼容：/blogs/ /icons/ /types/ → /imgs/blogs/ /imgs/icons/ /imgs/types/
+  if (s.startsWith('/blogs/') || s.startsWith('/icons/') || s.startsWith('/types/')) return '/imgs' + s
   if (s.startsWith('/')) return s
   return fallbackDir ? `${fallbackDir.replace(/\/$/, '')}/${s}` : `/${s}`
 }

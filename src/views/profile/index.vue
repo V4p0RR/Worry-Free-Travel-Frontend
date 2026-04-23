@@ -35,6 +35,7 @@ const tabs = [
   { key: '1', label: '我的笔记' },
   { key: '2', label: '关注动态' }
 ]
+const activeTab = ref('1')
 
 async function loadInfo() {
   if (!auth.user?.id) return
@@ -92,8 +93,10 @@ async function doSign() {
 }
 
 function onTabChange(k) {
+  activeTab.value = k
   if (k === '2' && feedBlogs.value.length === 0) loadFeed()
 }
+
 
 function toEdit() { router.push('/profile/edit') }
 async function doLogout() {
