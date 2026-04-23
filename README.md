@@ -7,6 +7,21 @@
 > 一些功能项目本身未实现  需自行实现
 >
 > 报401需要在后端拦截器排除该路径
+>比如 registry.addInterceptor(new LoginInterceptor()).excludePathPatterns(
+        "/user/code",
+        "/user/login",
+        "/user/logout",
+        "/user/{id}",
+        "/user/info/{id}",
+        "/blog/hot",
+        "/blog/{id}",
+        "/blog/likes/{id}",
+        "/blog/of/user",
+        "/shop/**",
+        "/shop-type/**",
+        "/voucher/list/{shopId}",
+        "/upload/**").order(1);
+> 
 > # web端适配
 <img width="1906" height="937" alt="image" src="https://github.com/user-attachments/assets/54611c6c-2384-4652-ae5d-18ae84f68782" />
 # 移动端适配
