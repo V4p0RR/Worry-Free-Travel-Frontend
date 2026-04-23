@@ -24,7 +24,7 @@
 > 
 > # web端适配
 <img width="1906" height="937" alt="image" src="https://github.com/user-attachments/assets/54611c6c-2384-4652-ae5d-18ae84f68782" />
-# 移动端适配
+> # 移动端适配
 <img width="388" height="842" alt="image" src="https://github.com/user-attachments/assets/a56e2af4-df08-4201-90f2-3c103b4607d3" />
 
 
