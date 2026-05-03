@@ -1,35 +1,51 @@
 # 旅无忧 · 前端
 
 > 发现身边的好去处 —— 本地生活探索与分享平台
-> 
-> 需将后端IMAGE_UPLOAD_DIR指向前端public/imgs目录
->
-> 一些功能项目本身未实现  需自行实现
->
-> 报401需要在后端拦截器排除该路径
->比如 registry.addInterceptor(new LoginInterceptor()).excludePathPatterns(
-        "/user/code",
-        "/user/login",
-        "/user/logout",
-        "/user/{id}",
-        "/user/info/{id}",
-        "/blog/hot",
-        "/blog/{id}",
-        "/blog/likes/{id}",
-        "/blog/of/user",
-        "/shop/**",
-        "/shop-type/**",
-        "/voucher/list/{shopId}",
-        "/upload/**").order(1);
-> 
-> # web端适配
-<img width="1906" height="937" alt="image" src="https://github.com/user-attachments/assets/54611c6c-2384-4652-ae5d-18ae84f68782" />
-<br/>
-<img width="1912" height="937" alt="image" src="https://github.com/user-attachments/assets/01d95e00-e760-46e0-a987-5222c9dda29f" />
 
-> # 移动端适配
-<img width="388" height="842" alt="image" src="https://github.com/user-attachments/assets/a56e2af4-df08-4201-90f2-3c103b4607d3" />
+## 后端依赖与对接
 
+| 服务 | 端口 | 说明 |
+|------|------|------|
+| Java wft 主项目 | 8081 | 旅无忧后端，提供 REST API |
+| Python Agent | 8090 | **AI 客服必需**，LangGraph + LLM 编排 |
+
+Python Agent 启动参见 [API 文档](API文档.md#九ai-agent-智能客服模块)。
+
+> 一些功能项目本身未实现，需自行实现。
+
+- 后端图片上传目录 `IMAGE_UPLOAD_DIR` 需指向本项目的 `public/imgs`
+- 报 401 需在后端拦截器排除该路径，比如：
+
+```java
+registry.addInterceptor(new LoginInterceptor()).excludePathPatterns(
+    "/user/code",
+    "/user/login",
+    "/user/logout",
+    "/user/{id}",
+    "/user/info/{id}",
+    "/blog/hot",
+    "/blog/{id}",
+    "/blog/likes/{id}",
+    "/blog/of/user",
+    "/shop/**",
+    "/shop-type/**",
+    "/voucher/list/{shopId}",
+    "/upload/**").order(1);
+```
+
+- Python Agent 返回蛇形命名（`recommended_shops` 等），前端 store 已做字段映射
+
+## 预览
+
+**Web 端**
+
+<img width="1906" height="937" alt="web" src="https://github.com/user-attachments/assets/54611c6c-2384-4652-ae5d-18ae84f68782" />
+
+<img width="1912" height="937" alt="chat" src="https://github.com/user-attachments/assets/01d95e00-e760-46e0-a987-5222c9dda29f" />
+
+**移动端**
+
+<img width="388" height="842" alt="mobile" src="https://github.com/user-attachments/assets/a56e2af4-df08-4201-90f2-3c103b4607d3" />
 
 ## 技术栈
 
@@ -46,6 +62,7 @@
 - **首页** — 热门笔记瀑布流 + 店铺分类入口
 - **店铺** — 按分类筛选、搜索、详情（优惠券、秒杀）
 - **笔记** — 发现页、详情（图片轮播、点赞、评论）
+- **AI 客服** — LangGraph 智能推荐，支持美食/攻略等多意图
 - **关注** — 关注用户的动态 Feed 流
 - **发笔记** — 图片上传 + 图文发布
 - **个人主页** — 签到、我的笔记、粉丝/关注数
@@ -60,7 +77,7 @@ src/
 │   ├── ui/         # 基础组件（VButton、VInput、VCard 等）
 │   ├── business/   # 业务组件（BlogCard、ShopCard 等）
 │   └── layout/     # 布局（侧边栏、空白页）
-├── stores/         # Pinia 状态（auth）
+├── stores/         # Pinia 状态（auth、chat）
 ├── utils/          # request.js、format.js
 ├── style/          # tokens.css、reset.css、global.css
 └── views/          # 页面（自动路由）
@@ -69,21 +86,14 @@ src/
 ## 本地开发
 
 ```bash
-# 安装依赖
 npm install
-
-# 启动开发服务器（代理到后端 :8081）
-npm run dev
-
-# 生产构建
-npm run build
+npm run dev        # 开发服务器，默认后端代理到:8081 agent代理到:8090
+npm run build      # 生产构建
 ```
-
-后端接口默认代理至 `http://localhost:8081`，可在 [vite.config.js](vite.config.js) 中修改。
 
 ## 设计规范
 
-配色基于 Claude.ai 风格：
+配色：
 
 | 令牌 | 值 | 用途 |
 |------|----|------|
@@ -92,6 +102,7 @@ npm run build
 | `--accent` | `#c96442` | 强调色、按钮 |
 
 响应式断点：
+
 - `>960px` — 完整侧边栏
 - `601–960px` — 图标侧边栏
 - `≤600px` — 底部 Tab 导航 + 顶部返回键
