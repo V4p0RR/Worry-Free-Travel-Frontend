@@ -14,7 +14,8 @@ const nav = [
   { to: '/shops', label: '店铺', icon: 'M4 7h16l-1 13H5zM9 7V5a3 3 0 0 1 6 0v2' },
   { to: '/blogs', label: '笔记', icon: 'M4 4h16v16H4zM8 8h8M8 12h8M8 16h5' },
   { to: '/feed', label: '关注', icon: 'M12 21s-8-5-8-12a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 7-8 12-8 12z' },
-  { to: '/publish', label: '发笔记', icon: 'M12 5v14M5 12h14', accent: true }
+  { to: '/publish', label: '发笔记', icon: 'M12 5v14M5 12h14', accent: true },
+  { to: '/chat', label: 'AI 客服', icon: 'M12 3c-4.97 0-9 4.03-9 9v5a2 2 0 0 0 2 2h1v-9c0-3.31 2.69-6 6-6s6 2.69 6 6v9h1a2 2 0 0 0 2-2v-5c0-4.97-4.03-9-9-9z' }
 ]
 
 const menuOpen = ref(false)
@@ -45,7 +46,7 @@ onMounted(() => {
 const pageTitle = computed(() => route.meta?.title || '')
 
 // 判断当前页面是否是顶级页面（不需要返回键）
-const topLevelRoutes = ['/home', '/shops', '/blogs', '/feed', '/publish', '/profile']
+const topLevelRoutes = ['/home', '/shops', '/blogs', '/feed', '/publish', '/profile', '/chat']
 const canGoBack = computed(() => !topLevelRoutes.includes(route.path))
 
 function goBack() {
