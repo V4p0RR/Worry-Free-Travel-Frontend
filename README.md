@@ -40,7 +40,7 @@ registry.addInterceptor(new LoginInterceptor()).excludePathPatterns(
 **Web 端**
 
 <img width="1906" height="937" alt="web" src="https://github.com/user-attachments/assets/54611c6c-2384-4652-ae5d-18ae84f68782" />
-
+<br/>
 <img width="1912" height="937" alt="chat" src="https://github.com/user-attachments/assets/01d95e00-e760-46e0-a987-5222c9dda29f" />
 
 **移动端**
